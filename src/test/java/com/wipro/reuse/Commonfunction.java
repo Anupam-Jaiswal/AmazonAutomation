@@ -1,5 +1,8 @@
 package com.wipro.reuse;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.testng.Assert;
 
 import com.codoid.products.exception.FilloException;
@@ -91,7 +94,7 @@ public class Commonfunction
 			aDriver.type(NewAddressPage.txtAddressLine1,rs.getField("AddressLine1"),"Address Line 1 Text box");
 			aDriver.type(NewAddressPage.txtAddressLine2,rs.getField("AddressLine2"), "Address Line 2 Text box");
 			aDriver.type(NewAddressPage.txtLandmark,rs.getField("Landmark"), "Landmark text box");
-			//aDriver.type(NewAddressPage.txtTown,rs.getField("Town"),"Town Text box");
+			aDriver.type(NewAddressPage.txtTown,rs.getField("Town"),"Town Text box");
 		}
 		
 		aDriver.click(NewAddressPage.btnAddAddress,"Add Address button");
@@ -105,7 +108,7 @@ public class Commonfunction
 	{
 		StartBrowser.childTest = StartBrowser.parentTest.createNode("Remove Address");
 		aDriver.click(AddressPage.btnRemove,"Remove Button");
-		aDriver.click(AddressPage.btnYes,"Yes Button");
+		aDriver.clickUsingJavaScrptit(AddressPage.btnYes,"Yes Button");
 		String message = aDriver.extractText(AddressPage.alertBox,"Alert Box");
 		Assert.assertEquals(message,"Address deleted");
 	}

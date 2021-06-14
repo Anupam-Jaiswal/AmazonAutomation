@@ -1,9 +1,14 @@
 package com.wipro.webdriverCommands;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -69,6 +74,7 @@ public class ActionDriver
 	{
 		try 
 		{
+			driver.findElement(locator).clear();
 			driver.findElement(locator).sendKeys(testData);
 			StartBrowser.childTest.pass("Performed type action on : " + elementName + " with data : "+testData);
 		}
@@ -94,6 +100,7 @@ public class ActionDriver
 		{
 			StartBrowser.childTest.fail("Unable to performed mouse hover action on : " + element , 
 			MediaEntityBuilder.createScreenCaptureFromBase64String(screenShot()).build());
+			throw e;
 		}
 	}
 	
@@ -109,7 +116,7 @@ public class ActionDriver
 		try
 		{
 			str = driver.findElement(locator).getText();
-			StartBrowser.childTest.pass("Extract the message from : " + element);
+			StartBrowser.childTest.pass("Extract the message "+ str + " from : " + element);
 		}
 		catch (Exception e)
 		{
@@ -118,6 +125,70 @@ public class ActionDriver
 		}
 		return str;
 		
+	}
+	/**
+	 * To get all the Ids of window ie parent window and child window.
+	 * @return Set <String>
+	 */
+	public Set <String> getWindowsId()
+	{
+		Set <String> s = null;
+		try
+		{
+			 s = driver.getWindowHandles();
+			 StartBrowser.childTest.pass("Successfully return the ids of all the window");
+		
+		}
+		catch (Exception e)
+		{
+			StartBrowser.childTest.fail("Unable to get the windows ids");
+			MediaEntityBuilder.createScreenCaptureFromBase64String(screenShot()).build();
+		}
+		return s;
+	}
+	/**
+	 * USed to move to the differ window
+	 * @param id = Id of the window
+	 * @param windowName = name of the window
+	 */
+	
+	public void moveToWindow(String id, String windowName)
+	{
+		try
+		{
+			driver.switchTo().window(id);
+			StartBrowser.childTest.pass("Successfully moved to : "+ windowName + "window");
+		}
+		catch(Exception e)
+		{
+			StartBrowser.childTest.fail("Unable to move to the : "+ windowName + "window");
+			MediaEntityBuilder.createScreenCaptureFromBase64String(screenShot()).build();
+			throw e;
+		}
+		
+	}
+	
+	/**
+	 * USed to click on any ui using java script 
+	 * @param locator -- Get it from OR
+	 * @param element -- name of the UI.
+	 */
+	
+	public void clickUsingJavaScrptit(By locator, String element)
+	{
+		try
+		{
+			WebElement ui = driver.findElement(locator);
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].click();", ui);
+			StartBrowser.childTest.pass("performed click actionn on : "+element);
+		}
+		catch (Exception e)
+		{
+			StartBrowser.childTest.fail("Unable to performed clicked operation on : "+element);
+			MediaEntityBuilder.createScreenCaptureFromBase64String(screenShot()).build();
+			throw e;
+		}
 	}
 		
 	public String screenShot()

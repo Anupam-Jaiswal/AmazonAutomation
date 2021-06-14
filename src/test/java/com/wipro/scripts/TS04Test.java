@@ -9,7 +9,7 @@ import com.wipro.reuse.Commonfunction;
 public class TS04Test extends StartBrowser
 {
 	@Test
-	public void add_Address_and_remove_address() throws FilloException
+	public void add_Address_and_remove_address() throws FilloException, InterruptedException
 	{
 		Commonfunction cfs = new Commonfunction();
 		cfs.login();
