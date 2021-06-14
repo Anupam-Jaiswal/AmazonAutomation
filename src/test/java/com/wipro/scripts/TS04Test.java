@@ -15,6 +15,6 @@ public class TS04Test extends StartBrowser
 		cfs.login();
 		cfs.addNewAddress();
 		cfs.removeAddress();
-		//final commit
+		//email commit
 	}
 }
