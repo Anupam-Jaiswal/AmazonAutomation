@@ -1,0 +1,16 @@
+pipeline{
+  stages{
+      stage("Cleaning stage"){
+     Steps {
+          bat "mvn clean"
+            }
+       }
+       stage("Testing stage"){
+       steps{
+              bat "mvn test"
+             }
+        }
+    }
+}
+      
+      
