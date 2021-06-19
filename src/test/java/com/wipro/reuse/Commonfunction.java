@@ -110,4 +110,12 @@ public class Commonfunction
 		String message = aDriver.extractText(AddressPage.alertBox,"Alert Box");
 		Assert.assertEquals(message,"Address deleted");
 	}
+	
+	public void setDefaultAddress()
+	{
+		StartBrowser.childTest = StartBrowser.parentTest.createNode("Setting Default Address");
+		aDriver.click(AddressPage.btnSetasDefault,"Set as Default Button");
+		String message = aDriver.extractText(AddressPage.alertBox,"Alert Box");
+		Assert.assertEquals(message,"Default address changed");
+	}
 }

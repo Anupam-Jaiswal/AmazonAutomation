@@ -17,4 +17,13 @@ public class TS04Test extends StartBrowser
 		cfs.removeAddress();
 		
 	}
+	
+	@Test
+	public void set_default_addrss() throws FilloException
+	{
+		Commonfunction cfs = new Commonfunction();
+		cfs.addNewAddress();
+		cfs.setDefaultAddress();
+		
+	}
 }
