@@ -69,6 +69,7 @@ public class ActionDriver
 	{
 		try 
 		{
+			driver.findElement(locator).clear();
 			driver.findElement(locator).sendKeys(testData);
 			StartBrowser.childTest.pass("Performed type action on : " + elementName + " with data : "+testData);
 		}
@@ -109,7 +110,7 @@ public class ActionDriver
 		try
 		{
 			str = driver.findElement(locator).getText();
-			StartBrowser.childTest.pass("Extract the message from : " + element);
+			StartBrowser.childTest.pass("Extract the message :"+ str + "from : " + element);
 		}
 		catch (Exception e)
 		{

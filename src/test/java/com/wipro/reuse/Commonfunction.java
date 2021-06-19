@@ -101,10 +101,11 @@ public class Commonfunction
 		
 	}
 	
-	public void removeAddress()
+	public void removeAddress() throws InterruptedException
 	{
 		StartBrowser.childTest = StartBrowser.parentTest.createNode("Remove Address");
 		aDriver.click(AddressPage.btnRemove,"Remove Button");
+		Thread.sleep(10000);
 		aDriver.click(AddressPage.btnYes,"Yes Button");
 		String message = aDriver.extractText(AddressPage.alertBox,"Alert Box");
 		Assert.assertEquals(message,"Address deleted");
